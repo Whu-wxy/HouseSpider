@@ -47,15 +47,6 @@ class ChengDuHouseSpider:
             print('table is incomplete')
             return
 
-        j = 0
-        for tr in tables[0].children:
-            if type(tr) is bs4.element.NavigableString:
-                continue
-
-            j = j + 1
-            print(j, '---', tr)
-
-
         today = datetime.datetime.now().strftime('%Y%m%d')
 
         # 商品房今日成交
@@ -74,7 +65,7 @@ class ChengDuHouseSpider:
 
             bussinessData.append(today)
             self.bussinessCSV.append(bussinessData)
-            print(bussinessData)
+            # print(bussinessData)
 
         i = 0
         # 二手房今日成交
@@ -92,7 +83,7 @@ class ChengDuHouseSpider:
 
             secondHandData.append(today)
             self.secondHandCSV.append(secondHandData)
-            print(secondHandData)
+            # print(secondHandData)
 
     def start(self):
         html = self.crawl(self.url)
