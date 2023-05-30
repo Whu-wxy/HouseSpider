@@ -31,3 +31,11 @@ python ChengDuHouseSpider.py
 1.修改daily_spider.py指定的时间
 
 2.启动定时任务，执行python daily_spider.py
+
+3.（可选）加入开启自启动项中，开机时自动运行，防止忘记。
+
+**以win10为例：**
+
+将daily_spider.bat文件复制到windows目录（C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp）下，可能杀毒软件会阻止，选择允许，重启电脑。
+
+注：开机自启以后会打开一个cmd窗口，关闭窗口，python程序将停止运行。
