@@ -22,6 +22,10 @@ http://zfcj.gz.gov.cn/zfcj/tjxx/spfxstjxx            http://zfcj.gz.gov.cn/spxx_
 
 python ChengDuHouseSpider.py
 
+杭州的脚本：
+
+需要下载一个Chromedriver，详细见https://zhuanlan.zhihu.com/p/373688337
+
 # 每日定时自动执行：
 
 1.修改daily_spider.py指定的时间
