@@ -22,8 +22,8 @@ class ChengDuHouseSpider:
         self.url = 'https://www.cdzjryb.com/SCXX/Default.aspx?action=ucEveryday2'
 
         itemNames = ['区域', '总面积（平方米）', '住宅套数(套)', '住宅面积(平方米)', '非住宅面积（平方米）', '日期']
-        self.bussinessCSV = CSVUtil('./商品房数据.csv', itemNames)
-        self.secondHandCSV = CSVUtil('./二手房数据.csv', itemNames)
+        self.bussinessCSV = CSVUtil('./datas/chengdu/bussiness.csv', itemNames)
+        self.secondHandCSV = CSVUtil('./datas/chengdu/secondHand.csv', itemNames)
 
     # 下载网页
     def crawl(self, url):
@@ -86,9 +86,10 @@ class ChengDuHouseSpider:
             # print(secondHandData)
 
     def start(self):
+        print('成都%s日数据爬取开始' % datetime.datetime.now().strftime('%Y%m%d'))
         html = self.crawl(self.url)
         self.parse(html.content)
-        print('%s日数据爬取完成'%datetime.datetime.now().strftime('%Y%m%d'))
+        print('成都%s日数据爬取完成'%datetime.datetime.now().strftime('%Y%m%d'))
 
 if __name__ == "__main__":
     spider = ChengDuHouseSpider()

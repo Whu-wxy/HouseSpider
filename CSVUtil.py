@@ -5,9 +5,14 @@ class CSVUtil:
 
     def __init__(self, filepath, itemNames):
         self.filepath = filepath
+
+        if not os.path.exists(os.path.dirname(filepath)):
+            os.makedirs(os.path.dirname(filepath))
+
         if os.path.exists(filepath):
             print('CSV文件已存在，无需创建:', filepath)
             return
+
 
         csv_file = open(filepath, 'w', newline='', encoding='gbk')
         writer = csv.writer(csv_file)
