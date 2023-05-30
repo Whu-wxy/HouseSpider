@@ -27,10 +27,10 @@ options.add_experimental_option('excludeSwitches', ['enable-automation'])
 options.add_argument("--disable-blink-features")
 options.add_argument("--disable-blink-features=AutomationControlled")
 
-s = Service("C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe")
-driver = webdriver.Chrome(service=s)
-
 def getDriverHttp(url):
+    s = Service("C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe")
+    driver = webdriver.Chrome(service=s)
+
     soup = ''
     try:
         element = WebDriverWait(driver, 1200).until(driver.get(url))
