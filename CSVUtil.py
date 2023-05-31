@@ -13,7 +13,6 @@ class CSVUtil:
             print('CSV文件已存在，无需创建:', filepath)
             return
 
-
         csv_file = open(filepath, 'w', newline='', encoding='gbk')
         writer = csv.writer(csv_file)
         writer.writerow(itemNames)
