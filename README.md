@@ -1,16 +1,19 @@
-# ChengDuHouseSpider
-用于下载成都市每日住房成交数据
+# HouseSpider
+用于下载每日住房成交数据
 
-成都市住房每日成交数据来自：
+## 住房销售数据来源：
+成都市住房每日成交数据：
 https://www.cdzjryb.com/SCXX/Default.aspx?action=ucEveryday2
 
-## 其他城市住房成交数据：
 杭州：http://fgj.hangzhou.gov.cn/col/col1229440802/index.html
 
 武汉：http://data.wuhan.gov.cn/page/data/data_set.html
 
 广州：
 http://zfcj.gz.gov.cn/zfcj/tjxx/spfxstjxx            http://zfcj.gz.gov.cn/spxx_clfjyjl.html
+
+链家二手房数据：
+https://cd.lianjia.com/ershoufang/wuhou/
 
 # 配置环境：
 
