@@ -6,7 +6,7 @@ import random
 import pandas as pd
 import re
 import os
-
+from datetime import datetime
 
 class LianjiaHouseSpider:
     def __init__(self):
@@ -14,11 +14,15 @@ class LianjiaHouseSpider:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
             'dtSessionId': 'nfqhu3qjvmilibolq3f'
         }
-        self.filepath = './datas/chengduSecondHand.csv'
+
+        self.cityCode = 'cd'
+
+        today = datetime.now().strftime('%Y%m%d')
+        self.filepath = './datas/chengduSecondHand_' + today + '.csv'
         self.maxPage = 51
 
-        self.qu = ['jinjiang', 'wuhou', 'gaoxin', 'qingyang', 'jinniu', 'chenghua', 'tianfuxinqu']
-        self.qu2 = ['锦江', '武侯', '高新', '青羊', '金牛', '成华', '天府新区']
+        self.qu = ['jinjiang', 'wuhou', 'gaoxin7', 'qingyang', 'jinniu', 'chenghua', 'tianfuxinqu', 'shuangliu', 'pidu']
+        self.qu2 = ['锦江', '武侯', '高新', '青羊', '金牛', '成华', '天府新区', '双流', '郫都']
 
         self.xiaoqu_list = []
         self.quyu_list = []
@@ -34,7 +38,6 @@ class LianjiaHouseSpider:
         self.tihu_list = []
         self.dianti_list = []
         self.fangwu_list = []
-
 
     # 获取有“房屋卖点”等数据
     def get_intro(self, url):
@@ -57,10 +60,11 @@ class LianjiaHouseSpider:
 
     def get_content(self, qu, qu2):
         print('正在爬{}区二手房数据...'.format(qu2))
+
         for j in range(1, self.maxPage):
             time.sleep(round(random.uniform(1, 2), 2))
             try:
-                url = 'https://cd.lianjia.com/ershoufang/' + qu + '/pg' + str(j)
+                url = 'https://' + self.cityCode + '.lianjia.com/ershoufang/' + qu + '/pg' + str(j)
                 r = requests.get(url, headers=self.headers).text
                 s = etree.HTML(r)
                 for k in range(1, 31):  # 一页里面有30套房源
@@ -76,6 +80,7 @@ class LianjiaHouseSpider:
                             '|', -1)
                         huxing = fangxing[0].lstrip('[\'').rstrip()
                         mianji = fangxing[1].strip()
+                        mianji = re.findall("\d+", mianji)[0]
                         chaoxiang = fangxing[2].strip()
                         zhuangxiu = fangxing[3].strip()
                         louceng = fangxing[4].strip()
@@ -83,10 +88,13 @@ class LianjiaHouseSpider:
                         price = str(s.xpath('//*[@id="content"]/div[1]/ul/li[{}]/div[1]/div[6]/div[1]/span/text()'.format(k)))
                         price = price.lstrip('[\'')
                         price = price.rstrip('\']')
+                        price = re.findall("\d+", price)[0]
                         unitPrice = str(
                             s.xpath('//*[@id="content"]/div[1]/ul/li[{}]/div[1]/div[6]/div[2]/span/text()'.format(k)))
                         unitPrice = unitPrice.lstrip('[\'')
                         unitPrice = unitPrice.rstrip('\']')
+                        unitPrice = unitPrice.replace(',', '')
+                        unitPrice = re.findall("\d+", unitPrice)[0]
 
                         intro_url = str(s.xpath('//*[@id="content"]/div[1]/ul/li[{}]/div[1]/div[1]/a/@href'.format(k)))
                         # 一定要将中括号和单引号去掉才能正常爬取数据。
@@ -171,9 +179,8 @@ class LianjiaHouseSpider:
         else:
             print('CSV文件已存在，无需创建:', self.filepath)
 
-        for i in range(1, len(self.qu)):
+        for i in range(len(self.qu)):
             self.get_content(self.qu[i], self.qu2[i])
-
 
 
 if __name__ == '__main__':

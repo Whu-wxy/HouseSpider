@@ -42,7 +42,7 @@ def getDriverHttp(url):
         time.sleep(3)
         driver.switch_to.frame(iframe)                          # 最重要的一步
 
-        WebDriverWait(driver, 1200).until(EC.visibility_of(driver.find_element(by=By.CLASS_NAME, value='box3_tab')))
+        WebDriverWait(driver, 10000).until(EC.visibility_of(driver.find_element(by=By.CLASS_NAME, value='box3_tab')))
 
         soup = BeautifulSoup(driver.page_source, "html.parser")
     except Exception as e:
