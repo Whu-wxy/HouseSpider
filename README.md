@@ -32,11 +32,11 @@ http://www.fangdi.com.cn/trade/trade.html
 
 # 手动执行：
 
+目前已实现的有：成都、杭州、广州
+
 python ChengDuHouseSpider.py
 
-杭州、广州的脚本：
-
-需要下载一个Chromedriver，详细见https://zhuanlan.zhihu.com/p/373688337
+杭州、广州的脚本需要下载一个Chromedriver，详细见https://zhuanlan.zhihu.com/p/373688337
 
 # 每日定时自动执行：
 
