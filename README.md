@@ -15,6 +15,15 @@ http://zfcj.gz.gov.cn/zfcj/tjxx/spfxstjxx            http://zfcj.gz.gov.cn/spxx_
 链家二手房数据：
 https://cd.lianjia.com/ershoufang/wuhou/
 
+北京：
+http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307749
+
+深圳：
+http://zjj.sz.gov.cn/xxgk/ztzl/pubdata/index.html
+
+上海：
+http://www.fangdi.com.cn/trade/trade.html
+
 # 配置环境：
 
 1.安装python3.x
