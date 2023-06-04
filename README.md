@@ -30,7 +30,7 @@ http://www.fangdi.com.cn/trade/trade.html
 
 2.在代码根目录下安装依赖： pip install -r requirements.txt
 
-# 手动执行：
+# 手动执行，获取当日房屋销售数据，保存至CSV文件：
 
 目前已实现的有：成都、杭州、广州
 
