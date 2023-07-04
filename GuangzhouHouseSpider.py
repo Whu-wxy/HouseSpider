@@ -11,7 +11,7 @@ import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import requests
 from CSVUtil import CSVUtil
-# import chardet
+import config
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,9 +55,9 @@ class GuangzhouHouseSpider:
                      '办公总套数', '办公总面积',
                      '车位总套数', '车位总面积',
                      '日期']
-        self.bussinessAvailableCSV = CSVUtil('./datas/guangzhou/bussinessAvailable.csv', itemNames)
-        self.bussinessUnsoldCSV = CSVUtil('./datas/guangzhou/bussinessUnsold.csv', itemNames)
-        self.bussinessSoldCSV = CSVUtil('./datas/guangzhou/bussinessSold.csv', itemNames)
+        self.bussinessAvailableCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, '/guangzhou/bussinessAvailable.csv'), itemNames)
+        self.bussinessUnsoldCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'guangzhou/bussinessUnsold.csv'), itemNames)
+        self.bussinessSoldCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'guangzhou/bussinessSold.csv'), itemNames)
 
 
     def parseAvailable(self, soup):

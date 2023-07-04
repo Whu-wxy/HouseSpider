@@ -12,7 +12,7 @@ import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import requests
 from CSVUtil import CSVUtil
-# import chardet
+import config
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,8 +55,8 @@ class HangzhouHouseSpider:
 
         itemNames = ['套数(套)', '总面积（平方米）', '住宅套数(套)', '住宅面积(平方米)', '日期']
         itemNames2 = ['房屋用途', '成交套数', '成交面积', '日期']
-        self.secondHandCSV = CSVUtil('./datas/hangzhou/secondHand.csv', itemNames)
-        self.bussinessCSV = CSVUtil('./datas/hangzhou/bussiness.csv', itemNames2)
+        self.secondHandCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/secondHand.csv'), itemNames)
+        self.bussinessCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/bussiness.csv'), itemNames2)
 
     # 解析网页数据
     # 二手房今日成交

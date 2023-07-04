@@ -8,6 +8,7 @@ import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import requests
 from CSVUtil import CSVUtil
+import config
 
 urllib3.disable_warnings()
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -22,8 +23,8 @@ class ChengDuHouseSpider:
         self.url = 'https://www.cdzjryb.com/SCXX/Default.aspx?action=ucEveryday2'
 
         itemNames = ['区域', '总面积（平方米）', '住宅套数(套)', '住宅面积(平方米)', '非住宅面积（平方米）', '日期']
-        self.bussinessCSV = CSVUtil('./datas/chengdu/bussiness.csv', itemNames)
-        self.secondHandCSV = CSVUtil('./datas/chengdu/secondHand.csv', itemNames)
+        self.bussinessCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'chengdu/bussiness.csv'), itemNames)
+        self.secondHandCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'chengdu/secondHand.csv'), itemNames)
 
     # 下载网页
     def crawl(self, url):
