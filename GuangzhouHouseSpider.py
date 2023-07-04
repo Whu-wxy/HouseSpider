@@ -11,7 +11,7 @@ import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import requests
 from CSVUtil import CSVUtil
-import config
+from config import *
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC

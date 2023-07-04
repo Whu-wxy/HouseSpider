@@ -8,7 +8,7 @@ import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import requests
 from CSVUtil import CSVUtil
-import config
+from config import *
 
 urllib3.disable_warnings()
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
