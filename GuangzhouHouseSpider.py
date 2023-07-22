@@ -36,7 +36,7 @@ def getDriverHttp(url):
     except Exception as e:
         print(e)
     try:
-        time.sleep(3)
+        time.sleep(6)
 
         WebDriverWait(driver, 30000).until(EC.visibility_of(driver.find_element(by=By.CSS_SELECTOR, value='tr[bgcolor="#ffffff"]')))
 
@@ -55,7 +55,7 @@ class GuangzhouHouseSpider:
                      '办公总套数', '办公总面积',
                      '车位总套数', '车位总面积',
                      '日期']
-        self.bussinessAvailableCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, '/guangzhou/bussinessAvailable.csv'), itemNames)
+        self.bussinessAvailableCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'guangzhou/bussinessAvailable.csv'), itemNames)
         self.bussinessUnsoldCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'guangzhou/bussinessUnsold.csv'), itemNames)
         self.bussinessSoldCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'guangzhou/bussinessSold.csv'), itemNames)
 
@@ -136,9 +136,9 @@ class GuangzhouHouseSpider:
         print('广州%s日数据爬取开始'%datetime.now().strftime('%Y%m%d'))
         soup = getDriverHttp(self.url)
 
-        self.parseAvailable(soup)
-        self.parseUnsold(soup)
-        self.parseSold(soup)
+        # self.parseAvailable(soup)
+        # self.parseUnsold(soup)
+        # self.parseSold(soup)
 
         print('广州%s日数据爬取完成'%datetime.now().strftime('%Y%m%d'))
 
