@@ -136,9 +136,9 @@ class GuangzhouHouseSpider:
         print('广州%s日数据爬取开始'%datetime.now().strftime('%Y%m%d'))
         soup = getDriverHttp(self.url)
 
-        # self.parseAvailable(soup)
-        # self.parseUnsold(soup)
-        # self.parseSold(soup)
+        self.parseAvailable(soup)
+        self.parseUnsold(soup)
+        self.parseSold(soup)
 
         print('广州%s日数据爬取完成'%datetime.now().strftime('%Y%m%d'))
 

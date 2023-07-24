@@ -37,10 +37,10 @@ def getDriverHttp(url):
     except Exception as e:
         print(e)
     try:
-        iframes = driver.find_elements(by=By.TAG_NAME, value='iframe')
-        iframe = iframes[0]
-        time.sleep(3)
-        driver.switch_to.frame(iframe)                          # 最重要的一步
+        time.sleep(6)
+        # iframes = driver.find_elements(by=By.TAG_NAME, value='iframe')
+        # iframe = iframes[0]
+        # driver.switch_to.frame(iframe)                          # 最重要的一步
 
         WebDriverWait(driver, 10000).until(EC.visibility_of(driver.find_element(by=By.CLASS_NAME, value='box3_tab')))
 
@@ -51,7 +51,7 @@ def getDriverHttp(url):
 
 class HangzhouHouseSpider:
     def __init__(self):
-        self.url = 'http://fgj.hangzhou.gov.cn/col/col1229440802/index.html'
+        self.url = 'https://zwfw.fgj.hangzhou.gov.cn/hzfcweb_ifs/interaction/scxx'
 
         itemNames = ['套数(套)', '总面积（平方米）', '住宅套数(套)', '住宅面积(平方米)', '日期']
         itemNames2 = ['房屋用途', '成交套数', '成交面积', '日期']
