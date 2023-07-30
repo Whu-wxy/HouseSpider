@@ -58,6 +58,11 @@ class HangzhouHouseSpider:
         self.secondHandCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/secondHand.csv'), itemNames)
         self.bussinessCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/bussiness.csv'), itemNames2)
 
+        itemNames3 = ['区域', '可售套数', '可售面积', '其中住宅可售套数', '其中住宅可售面积', '日期']
+        itemNames4 = ['区域', '套数', '面积', '住宅套数', '住宅面积', '日期']
+        self.secondHandRegionCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/secondHandRegion.csv'), itemNames3)
+        self.bussinessRegionCSV = CSVUtil(os.path.join(DATA_SAVE_PATH, 'hangzhou/bussinessRegion.csv'), itemNames4)
+
     # 解析网页数据
     # 二手房今日成交
     def parseSecondHand(self, soup):
@@ -89,13 +94,12 @@ class HangzhouHouseSpider:
 
     def parseBussiness(self, soup):
         bussinessDiv = soup.find('div', {"class": "E_table1"}, recursive=True)
-        secondHandTr = bussinessDiv.find_all('tr', recursive=True)
-        # secondHandDatas = secondHandTotal.find_all('span', recursive=True)
+        bussinessTr = bussinessDiv.find_all('tr', recursive=True)
 
         today = datetime.datetime.now().strftime('%Y%m%d')
 
         i = 0
-        for tr in secondHandTr:
+        for tr in bussinessTr:
             if type(tr) is bs4.element.NavigableString:
                 continue
             i = i + 1
@@ -116,12 +120,71 @@ class HangzhouHouseSpider:
             bussinessData.append(today)
             self.bussinessCSV.append(bussinessData)
 
+    # 二手房今日成交
+    def parseSecondHandRegion(self, soup):
+        secondHandDiv = soup.find('div', {"id": "scrollBox1"}, recursive=True)
+        secondHandTr = secondHandDiv.find('div', {"id": "con3"}, recursive=True)
+
+        today = datetime.datetime.now().strftime('%Y%m%d')
+
+        for listItem in secondHandTr:
+            if type(listItem) is bs4.element.NavigableString:
+                continue
+
+            i = 0
+            secondHandData = []
+            for item in listItem.children:
+                if type(item) is bs4.element.NavigableString:
+                    continue
+
+                data = item.text.strip()
+                if i == 1 or i == 3:
+                    data = data[:-1]
+                if i == 2 or i == 4:
+                    data = data[:-2]
+                i = i + 1
+                secondHandData.append(data)
+
+            secondHandData.append(today)
+            if len(secondHandData) == 6:
+                self.secondHandRegionCSV.append(secondHandData)
+
+    def parseBussinessRegion(self, soup):
+        bussinessDiv = soup.find('div', {"id": "scroll-wrap"}, recursive=True)
+        # bussinessTr = bussinessDiv.find_all('list-item', recursive=True)
+        # bussinessTr = bussinessDiv.find_all('div', {"id": "list-item"}, recursive=True)
+
+        today = datetime.datetime.now().strftime('%Y%m%d')
+
+        for tr in bussinessDiv.children:
+            if type(tr) is bs4.element.NavigableString:
+                continue
+
+            bussinessData = []
+            i = 0
+            for item in tr.children:
+                if type(item) is bs4.element.NavigableString:
+                    continue
+
+                data = item.text.strip()
+                if i == 1 or i == 3:
+                    data = data[:-1]
+                if i == 2 or i == 4:
+                    data = data[:-2]
+                i = i + 1
+                bussinessData.append(data)
+            bussinessData.append(today)
+            if len(bussinessData) == 6:
+                self.bussinessRegionCSV.append(bussinessData)
+
     def start(self):
         print('杭州%s日数据爬取开始'%datetime.datetime.now().strftime('%Y%m%d'))
         soup = getDriverHttp(self.url)
 
         self.parseSecondHand(soup)
         self.parseBussiness(soup)
+        self.parseSecondHandRegion(soup)
+        self.parseBussinessRegion(soup)
         print('杭州%s日数据爬取完成'%datetime.datetime.now().strftime('%Y%m%d'))
 
 
