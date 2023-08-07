@@ -37,7 +37,7 @@ def getDriverHttp(url):
     except Exception as e:
         print(e)
     try:
-        time.sleep(6)
+        time.sleep(15)
         # iframes = driver.find_elements(by=By.TAG_NAME, value='iframe')
         # iframe = iframes[0]
         # driver.switch_to.frame(iframe)                          # 最重要的一步
